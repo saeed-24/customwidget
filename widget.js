@@ -6,7 +6,7 @@ if (!apiKey) {
 }
 
 // Utility: send both roughPoints and report back to JotForm
-def sendAll() {
+function sendAll() {
   const payload = {
     roughPoints: document.getElementById('roughPoints').value || '',
     report: document.getElementById('report').value || ''
@@ -35,12 +35,20 @@ document.getElementById('generate').addEventListener('click', async function() {
   if (!rough) { alert('Please enter some rough points first'); return; }
 
   const endpoint = 'https://api.openai.com/v1/chat/completions';
-  const body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: rough }], temperature: 0.7, max_tokens: 512 };
+  const body = {
+    model: 'gpt-3.5-turbo',
+    messages: [{ role: 'user', content: rough }],
+    temperature: 0.7,
+    max_tokens: 512
+  };
 
   try {
     const res = await fetch(endpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
       body: JSON.stringify(body)
     });
     const json = await res.json();
@@ -57,7 +65,10 @@ document.getElementById('generate').addEventListener('click', async function() {
 
 // On final form submission, send the complete widget value and mark valid
 JFCustomWidget.subscribe('submit', function() {
-  const payload = { roughPoints: document.getElementById('roughPoints').value || '', report: document.getElementById('report').value || '' };
+  const payload = {
+    roughPoints: document.getElementById('roughPoints').value || '',
+    report: document.getElementById('report').value || ''
+  };
   const isValid = payload.roughPoints.trim() !== '' && payload.report.trim() !== '';
   JFCustomWidget.sendSubmit({ valid: isValid, value: JSON.stringify(payload) });
 });
