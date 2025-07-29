@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Surveillance Report Widget</title>
+  <!-- JotForm Widget API -->
+  <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+  <link rel="stylesheet" href="widget.css">
+</head>
+<body>
+  <div class="container">
+    <div class="field-group">
+      <label for="roughPoints">Rough Points</label>
+      <textarea id="roughPoints" placeholder="Enter your notes here..."></textarea>
+    </div>
+
+    <button id="generate" class="btn-primary">Generate Report</button>
+
+    <div class="field-group">
+      <label for="report">Surveillance Report</label>
+      <textarea id="report" placeholder="Your generated report will appear here..."></textarea>
+    </div>
+  </div>
+  <script src="widget.js"></script>
+</body>
+</html>
